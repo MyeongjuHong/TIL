@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.getElementById("root");
+
+    /*const h3 = React.createElement(
+       "h3",
+       {
+         onMouseEnter: () => console.log("mouse enter"),
+       },
+       "Hello I'm h3"
+     );*
+
+     const btn = React.createElement(
+       "button",
+       {
+         onClick: () => console.log("I'm clicked"),
+         style: { backgroundColor: "tomato" },
+       },
+       "click"
+     );*/
+
+    /*const Title = () => (
+       <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+         Hello I'm a Title
+       </h3>
+     );
+     const Button = () => (
+       <button
+         style={{ backgroundColor: "tomato" }}
+         onClick={() => console.log("I'm clicked")}
+       >
+         click
+       </button>
+     );*/
+
+    /*let counter = 0;
+    function countUp() {
+      counter = counter + 1;
+      render();
+    }
+    function render() {
+      ReactDOM.render(<Container />, root);
+    }*/
+
+    function App() {
+      const [counter, setCounter] = React.useState(0);
+      const onClick = () => {
+        // setCounter(counter + 1);
+        setCounter((current) => current + 1);
+        // 현재 state를 바탕으로 다음 state를 계산할 때
+        // 이 currnet가 확실히 현재 값이라는 걸 보장?
+        // 현재 state를 주고, 예상치 못한 업데이트에도 혼동 방지
+      };
+      return (
+        <div>
+          <h3>Total clicks: {counter}</h3>
+          <button onClick={onClick}>click</button>
+        </div>
+      );
+    }
+    // const container = React.createElement("div", null, [Title, Button]);
+    ReactDOM.render(<App />, root);
+    // render();
+  </script>
+</html>

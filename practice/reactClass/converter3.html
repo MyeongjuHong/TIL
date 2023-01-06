@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // 분<->시간 자동 상호작용 & invert 버전 converter
+
+    function MtoH() {
+      const [amount, setAmount] = React.useState("");
+      //   const [minutes, setMinutes] = React.useState("");
+      //   const [hours, setHours] = React.useState("");
+      const [invert, setInvert] = React.useState(false);
+
+      /*const onChangeMinutes = (event) => {
+        setMinutes(event.target.value);
+        setHours(event.target.value / 60);
+        // setMinutes -> setHours -> minutes변경 순으로 실행
+        // 최신 변경 값으로 60을 나눠야함!!
+      };
+
+      const onChangeHours = (event) => {
+        setHours(event.target.value);
+        setMinutes(event.target.value * 60);
+      };*/
+
+      const onChange = (event) => {
+        setAmount(event.target.value);
+      };
+
+      const onReset = () => {
+        // setMinutes("");
+        // setHours("");
+        //input 창에서 표시할 수 없음!
+        setAmount("");
+      };
+
+      const onInvert = () => {
+        setInvert((current) => !current);
+        //invert을 인자값
+      };
+
+      return (
+        <>
+          <h3>Minutes & Hours</h3>
+          <input
+            id="minutes"
+            type="number"
+            placeholder="Minutes"
+            //value={invert ? (current) => current * 60 : (current) => current}
+            value={invert ? amount * 60 : amount}
+            onChange={onChange}
+            disabled={invert}
+          />
+          <label htmlfor="minutes">분</label>
+          <br />
+          <input
+            id="hours"
+            type="number"
+            placeholder="Hours"
+            //value={invert ? (current) => current : (current) => current / 60}
+            value={invert ? amount : amount / 60}
+            onChange={onChange}
+            disabled={!invert}
+          />
+          <label htmlfor="hours">시간</label>
+          <br />
+          <button onClick={onReset}>reset</button>
+          <button onClick={onInvert}>{invert ? "back" : "invert"}</button>
+        </>
+      );
+    }
+    function MtoP() {
+      const [m2, setM2] = React.useState("");
+      const [pyeong, setPyeong] = React.useState("");
+      const [invert, setInvert] = React.useState(false);
+
+      const onChangeM2 = (event) => {
+        setM2(event.target.value);
+        setPyeong((event.target.value / 3.3).toFixed(1));
+      };
+      const onChangePyeong = (event) => {
+        setPyeong(event.target.value);
+        setM2((event.target.value * 3.3).toFixed(1));
+      };
+      const onReset = () => {
+        setM2("");
+        setPyeong("");
+      };
+      const onInvert = () => {
+        setInvert(!invert);
+      };
+
+      return (
+        <>
+          <h3>M² & 평</h3>
+          <input
+            id="m2"
+            type="number"
+            placeholder="M²"
+            value={m2}
+            onChange={onChangeM2}
+            disabled={invert}
+          />
+          <label htmlfor="m2">M²</label>
+          <br />
+          <input
+            id="pyeong"
+            type="number"
+            placeholder="평"
+            value={pyeong}
+            onChange={onChangePyeong}
+            disabled={!invert}
+          />
+          <label htmlfor="pyeong">평</label>
+          <br />
+          <button onClick={onReset}>reset</button>
+          <button onClick={onInvert}>invert</button>
+        </>
+      );
+    }
+    function App() {
+      const [index, setIndex] = React.useState("");
+      const onSelect = (event) => {
+        setIndex(event.target.value);
+      };
+      return (
+        <>
+          <h1>Super Converter</h1>
+          <select value={index} onChange={onSelect}>
+            <option value="none" selected>
+              select
+            </option>
+            <option value="0"> Minutes & Hours</option>
+            <option value="1">M² & 평</option>
+          </select>
+          {index === "0" ? <MtoH /> : null}
+          {index === "1" ? <MtoP /> : null}
+        </>
+      );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+    // render();
+  </script>
+</html>

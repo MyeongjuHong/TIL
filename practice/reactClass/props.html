@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const Btn = ({ text, changeText }) => {
+      //{키}를 인자로 받아와도 되는 이유?????
+      // 값을 가져올 때,
+      // (객체) {return( {객체.키1} {객체.키2} ); } <이형식이 아니고
+      // ({키1, 키2}) {return( {키1} {키2} ); } <이형식이 되는 이유??..
+
+      return (
+        <button
+          style={{
+            backgroundColor: "black",
+            color: "yellow",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius: 10,
+          }}
+          onClick={changeText}
+        >
+          {/*props.text*/}
+          {text}
+        </button>
+      );
+    };
+
+    function App() {
+      //const Btn = (props) => {
+      // 컴포넌트 생성할 때 props(인자) 지정 시,
+      // 리액트가 컴포넌트의 attribute(속성)을 props의 object(객체)로 넣어 전달
+      // 함수는 그 props 객체의 키를 반환
+      // {text:'hi', textFuc:'bye'}
+      const [value, setValue] = React.useState("one");
+      const changeValue = () => setValue("two");
+      return (
+        <>
+          <Btn text={value} changeText={changeValue} />
+          {
+            //<Btn text="hello" textFunc="seeU" />
+          }
+        </>
+      );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+    // render();
+  </script>
+</html>

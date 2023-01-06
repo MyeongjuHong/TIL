@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // 분<->시간 자동 상호작용 & flip 버전 converter
+
+    function App() {
+      const [minutes, setMinutes] = React.useState("");
+      const [hours, setHours] = React.useState("");
+      const [flip, setFlip] = React.useState(false);
+
+      const onChangeMinutes = (event) => {
+        setMinutes(event.target.value);
+        setHours(event.target.value / 60);
+        // setMinutes -> setHours -> minutes변경 순으로 실행
+        // 최신 변경 값으로 60을 나눠야함!!
+      };
+
+      const onChangeHours = (event) => {
+        setHours(event.target.value);
+        setMinutes(event.target.value * 60);
+      };
+
+      const onReset = () => {
+        setMinutes("");
+        setHours("");
+        //input 창에서 표시할 수 없음!
+      };
+
+      const onFlip = () => {
+        setFlip((current) => !current);
+      };
+
+      return (
+        <>
+          <h1>Super Converter</h1>
+          <input
+            id="minutes"
+            type="number"
+            placeholder="Minutes"
+            value={minutes}
+            onChange={onChangeMinutes}
+            disabled={flip}
+          />
+          <label htmlfor="minutes">분</label>
+          <br />
+          <input
+            id="hours"
+            type="number"
+            placeholder="Hours"
+            value={hours}
+            onChange={onChangeHours}
+            disabled={!flip}
+          />
+          <label htmlfor="hours">시간</label>
+          <br />
+          <button onClick={onReset}>reset</button>
+          <button onClick={onFlip}>flip</button>
+        </>
+      );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+    // render();
+  </script>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // 버튼 분<->시간 상호작용 버전 converter
+
+    function App() {
+      const [minutes, setMinutes] = React.useState();
+      const [hours, setHours] = React.useState();
+
+      const onChange = (event) => {
+        setMinutes(event.target.value);
+      };
+
+      const onClick = () => {
+        setHours(minutes / 60);
+        // minutes 변수는 매개변수로 표시할 필요 X
+        // 함수 밖에 이미 선언되어 있음!
+      };
+
+      const onReset = () => {
+        setMinutes("");
+        setHours(null);
+        //input 창에서 표시할 수 없음!
+      };
+
+      return (
+        <>
+          <h1>Super Converter</h1>
+          <input
+            id="minutes"
+            placeholder="Minutes"
+            type="number"
+            value={!minutes ? "" : minutes}
+            onChange={onChange}
+          />
+          <label htmlfor="minutes">분</label>
+          <br />
+          <button onClick={onClick}>convert</button>
+          <br />
+          <input
+            id="hours"
+            placeholder="Hours"
+            type="number"
+            value={!hours ? "" : hours}
+            // hours가 undefined면 "", 값이 있으면 hours 표시
+          />
+          <label htmlfor="hours">시간</label>
+          <br />
+          <button onClick={onReset}>reset</button>
+        </>
+      );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+    // render();
+  </script>
+</html>
