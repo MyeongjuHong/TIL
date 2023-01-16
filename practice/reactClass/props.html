@@ -1,55 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head> </head>
-  <body>
-    <div id="root"></div>
-  </body>
-  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script type="text/babel">
-    const Btn = ({ text, changeText }) => {
-      //{키}를 인자로 받아와도 되는 이유?????
-      // 값을 가져올 때,
-      // (객체) {return( {객체.키1} {객체.키2} ); } <이형식이 아니고
-      // ({키1, 키2}) {return( {키1} {키2} ); } <이형식이 되는 이유??..
 
-      return (
-        <button
-          style={{
-            backgroundColor: "black",
-            color: "yellow",
-            padding: "10px 20px",
-            border: 0,
-            borderRadius: 10,
-          }}
-          onClick={changeText}
-        >
-          {/*props.text*/}
-          {text}
-        </button>
-      );
-    };
+<head> </head>
 
-    function App() {
-      //const Btn = (props) => {
-      // 컴포넌트 생성할 때 props(인자) 지정 시,
-      // 리액트가 컴포넌트의 attribute(속성)을 props의 object(객체)로 넣어 전달
-      // 함수는 그 props 객체의 키를 반환
-      // {text:'hi', textFuc:'bye'}
-      const [value, setValue] = React.useState("one");
-      const changeValue = () => setValue("two");
-      return (
-        <>
-          <Btn text={value} changeText={changeValue} />
-          {
-            //<Btn text="hello" textFunc="seeU" />
-          }
-        </>
-      );
-    }
-    const root = document.getElementById("root");
-    ReactDOM.render(<App />, root);
+<body>
+  <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+<script type="text/babel">
+  const Btn = ({ text, changeText }) => {
+    console.log(text, "was rendered");
+    // 첫번째 버튼을 눌렀는데 두번째 버튼도 리렌더링 됐다?
+    // useState 함수는 변경된 사항 발견시 react가 전체 리렌더링
+    // 그리고 변경 사항만 바꿔 출력
+    // 과정: 버튼의 onClick 기능에서 changeText props 실행
+    // -> changeText 속성은 chageValue 함수 실행
+    // -> changeValue 함수는 setValue 함수 실행
+    // -> react DOM이 setValue 함수 캐치해 전체 리렌더링
+    return (<>
+      <button
+        style={{
+          backgroundColor: "black",
+          color: "yellow",
+          padding: "10px 20px",
+          border: 0,
+          borderRadius: 10,
+        }}
+        onClick={changeText}
+      >
+        {/*props.text*/}
+        {text}
+      </button></>
+    );
+  };
+
+  function App() {
+    //const Btn = (props) => {
+    // 컴포넌트 생성할 때 props(인자) 지정 시,
+    // 리액트가 컴포넌트의 attribute(속성)을 props의 object(객체)로 넣어 전달
+    // 함수는 그 props 객체의 키를 반환
+    // {text:'hi', textFuc:'bye'}
+    const [value, setValue] = React.useState("one");
+    const changeValue = () => setValue("two");
+    return (
+      <>
+        <Btn text={value} changeText={changeValue} />
+        <Btn text="hello" />
+      </>
+    );
+  }
+  const root = document.getElementById("root");
+  ReactDOM.render(<App />, root);
     // render();
-  </script>
+</script>
+
 </html>
