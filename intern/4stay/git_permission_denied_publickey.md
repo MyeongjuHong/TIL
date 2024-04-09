@@ -27,3 +27,8 @@ Settings > SSH and GPG Keys > New SSH key button
 
 paste ssh key in ssh key input line
 
+***
+
+### Reference
+
+[git@github.com:Permission denied(publickey)](https://medium.com/@su_bak/git-github-com-permission-denied-publickey-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95-76b0ab741c62)
