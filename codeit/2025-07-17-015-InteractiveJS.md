@@ -99,7 +99,7 @@ list.addEventListener("click", function (e) {
 
 ### Event Handler
 
-- js 프로퍼티를 활용한 이벤트(ex. onClick)는 중요한 이벤트를 덮어쓸 수 있으며, 여러 개의 이벤트 핸들러를 다룰 수 없음.
+- js 프로퍼티를 활용한 이벤트(ex. onClick)는 중요한 이벤트를 덮어쓸 수 있으며, 여러 개의 이벤트 핸들러를 다룰 수 없음
 
 - 이벤트별 리턴 값이 있을 때 해당 값을 모두 다뤄야 하므로 복잡함.
 
@@ -116,12 +116,12 @@ list.addEventListener("click", function (e) {
 
 - `function() {}` 형태의 익명 함수는 removeEventListener에 전달 불가.
 
-- 이벤트 핸들러에 화살표 함수 `() => {}` 형태 전달 시 등록되지 않음. 이는 즉시 실행문이며, 반환값이 없으면 `undefined` 반환.
+- 이벤트 핸들러에 화살표 함수 `() => {}` 형태 전달 시 등록되지 않음 이는 즉시 실행문이며, 반환값이 없으면 `undefined` 반환.
 
 #### 퀴즈
 
 - removeEventListener 메소드는 addEventListener로 등록된 동일한 타입과 핸들러 함수일 때만 삭제 가능함.
-- addEventListener와 removeEventListener에 사용된 핸들러 함수가 모양이 같아도 각각 임시로 작성된 다른 함수이므로 동일하지 않음.
+- addEventListener와 removeEventListener에 사용된 핸들러 함수가 모양이 같아도 각각 임시로 작성된 다른 함수이므로 동일하지 않음
 - addEventListener 안에서는 함수 선언 가능하나, removeEventListener는 대상 함수가 분명해야 함.
 
 ### Event Object
@@ -167,7 +167,7 @@ list.addEventListener("click", function (e) {
 
 - for...in 반복문 문제점
 
-  - for...in은 객체 순회용이며, length, entries, keys 등 프로퍼티까지 순회하므로 예상치 못한 값도 포함될 수 있음.
+  - for...in은 객체 순회용이며, length, entries, keys 등 프로퍼티까지 순회하므로 예상치 못한 값도 포함될 수 있음
   - 따라서 배열 순회 시에는 for...of 사용 권장.
 
 - for...in과 for...of 차이
@@ -175,15 +175,15 @@ list.addEventListener("click", function (e) {
   - for...in은 키를 반환함.
   - for...of는 값을 반환함.
 
-- for...in 사용 시 removeEventListener가 제대로 동작하지 않는 문제 발생 가능성 있음.
+- for...in 사용 시 removeEventListener가 제대로 동작하지 않는 문제 발생 가능성 있음
 
-  - 배열은 숫자 인덱스 기반 객체이므로 for...in으로도 작동할 수 있으나, 브라우저가 내부적으로 다르게 처리하여 참조가 달라질 수 있음.
+  - 배열은 숫자 인덱스 기반 객체이므로 for...in으로도 작동할 수 있으나, 브라우저가 내부적으로 다르게 처리하여 참조가 달라질 수 있음
 
 ### Event Bubbling
 
 - 이벤트 발생 시, 동일 타입 이벤트는 부모 요소까지 전파됨.
 
-- `e.target`은 최초 이벤트 발생 요소로 버블링하지 않음.
+- `e.target`은 최초 이벤트 발생 요소로 버블링하지 않음
 
 - `e.currentTarget`은 이벤트 핸들러가 등록된 요소.
 
